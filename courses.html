@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses - LMS</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/component.css">
+</head>
+<body>
+    <!-- Alert container for notifications -->
+    <div id="alertContainer"></div>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>LMS Portal</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                    <li><a href="courses.html" class="nav-link" data-page="courses">Courses</a></li>
+                    <li><a href="assignments.html" class="nav-link" data-page="assignments">Assignments</a></li>
+                    <li><a href="profile.html" class="nav-link" data-page="profile">Profile</a></li>
+                    <li><a href="index.html" class="nav-link">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Sidebar overlay for mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
+                <h1>My Courses</h1>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
+            </div>
+            
+            <!-- Courses Content -->
+            <div class="dashboard-container">
+                <div class="dashboard-section">
+                    <h2>Enrolled Courses</h2>
+                    <p>Below are all the courses you are currently enrolled in. Click on a course to view details.</p>
+                </div>
+                
+                <!-- Course Cards Grid - Will be populated by JavaScript -->
+                <div class="course-grid" id="courseGrid">
+                    <!-- Course cards will be inserted here by courses.js -->
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/courses.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>
