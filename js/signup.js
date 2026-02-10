@@ -1,15 +1,5 @@
-/**
- * signup.js - User Registration Module
- * 
- * Requirements:
- * - Validate all form fields
- * - Check if username/email already exists
- * - Ensure password and confirm password match
- * - Store user credentials in localStorage
- * - Redirect to login page after successful registration
- */
 
-// Get DOM elements
+
 const signupForm = document.getElementById('signupForm');
 const signupUsername = document.getElementById('signupUsername');
 const signupEmail = document.getElementById('signupEmail');
@@ -20,7 +10,6 @@ const signupEmailError = document.getElementById('signupEmailError');
 const signupPasswordError = document.getElementById('signupPasswordError');
 const confirmPasswordError = document.getElementById('confirmPasswordError');
 
-// Handle form submission
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
@@ -30,8 +19,7 @@ signupForm.addEventListener('submit', (e) => {
     const confirmPasswordValue = confirmPassword.value.trim();
     
     let isValid = true;
-    
-    // Validate username
+
     if (usernameValue === '') {
         showError(signupUsernameError, signupUsername, 'Username is required');
         isValid = false;
@@ -47,8 +35,7 @@ signupForm.addEventListener('submit', (e) => {
     } else {
         hideError(signupUsernameError, signupUsername);
     }
-    
-    // Validate email
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailValue === '') {
         showError(signupEmailError, signupEmail, 'Email is required');
@@ -62,16 +49,14 @@ signupForm.addEventListener('submit', (e) => {
     } else {
         hideError(signupEmailError, signupEmail);
     }
-    
-    // Validate password
+
     if (passwordValue === '') {
         showError(signupPasswordError, signupPassword, 'Password is required');
         isValid = false;
     } else {
         hideError(signupPasswordError, signupPassword);
     }
-    
-    // Validate confirm password
+
     if (confirmPasswordValue === '') {
         showError(confirmPasswordError, confirmPassword, 'Please confirm your password');
         isValid = false;
@@ -81,14 +66,12 @@ signupForm.addEventListener('submit', (e) => {
     } else {
         hideError(confirmPasswordError, confirmPassword);
     }
-    
-    // If all validations pass, create account
+
     if (isValid) {
         createAccount(usernameValue, emailValue, passwordValue);
     }
 });
 
-// Clear errors on input
 signupUsername.addEventListener('input', () => {
     if (signupUsername.value.trim() !== '') {
         hideError(signupUsernameError, signupUsername);
@@ -113,60 +96,49 @@ confirmPassword.addEventListener('input', () => {
     }
 });
 
-// Helper function to show error
 function showError(errorElement, inputElement, message) {
     errorElement.textContent = message;
     errorElement.classList.add('show');
     inputElement.style.borderColor = 'var(--danger-color)';
 }
 
-// Helper function to hide error
 function hideError(errorElement, inputElement) {
     errorElement.classList.remove('show');
     inputElement.style.borderColor = 'var(--border-color)';
 }
 
-// Check if username already exists
 function isUsernameTaken(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     return users.some(user => user.username.toLowerCase() === username.toLowerCase());
 }
 
-// Check if email already exists
 function isEmailTaken(email) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     return users.some(user => user.email.toLowerCase() === email.toLowerCase());
 }
 
-// Create new account
 function createAccount(username, email, password) {
-    // Get existing users or initialize empty array
-    const users = JSON.parse(localStorage.getItem('users')) || [];
     
-    // Create new user object
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
     const newUser = {
         username: username,
         email: email,
-        password: password, // Note: In real apps, never store plain text passwords!
+        password: password, 
         createdAt: new Date().toISOString()
     };
-    
-    // Add new user to array
+
     users.push(newUser);
-    
-    // Save to localStorage
+
     localStorage.setItem('users', JSON.stringify(users));
-    
-    // Show success message
+
     showSuccessAlert('Account created successfully! Redirecting to login...');
-    
-    // Redirect to login page after delay
+
     setTimeout(() => {
         window.location.href = 'index.html';
     }, 2000);
 }
 
-// Show success alert
 function showSuccessAlert(message) {
     const alertContainer = document.getElementById('alertContainer');
     if (!alertContainer) return;

@@ -1,36 +1,5 @@
-/**
- * assignments.js - Assignments Module
- * 
- * Task 5: Assignment Status Management
- * - Store assignment data in JavaScript
- * - Display assignments dynamically
- * - Change status text and color based on due date (static logic)
- * - Statuses: Pending, Submitted, Late
- * 
- * Task 6: Assignment Submission Simulation
- * - On clicking "Submit Assignment":
- *   - Change status from Pending to Submitted
- *   - Disable submit button
- *   - Show confirmation message
- * 
- * JavaScript Requirements:
- * - Event listeners
- * - Button state management
- * - Dynamic text updates
- * - Conditional statements
- * - Dynamic class assignment
- * - Date comparison (basic)
- * 
- * Elements to interact with:
- * - #assignmentsList - container for assignment cards
- * - .submit-btn - submit buttons (dynamically created)
- * - #alertContainer - for showing notifications
- * 
- * Task 9: Navigation Active State
- * Task 10: Alert & Notification System
- */
 
-// Sample data structure for assignments
+
 const assignments = [
     {
         id: 1,
@@ -74,17 +43,14 @@ const assignments = [
     }
 ];
 
-// Initialize assignments page
 document.addEventListener('DOMContentLoaded', () => {
     renderAssignments();
 });
 
-// Task 5 & 6: Render assignments dynamically
 function renderAssignments() {
     const assignmentsList = document.getElementById('assignmentsList');
     if (!assignmentsList) return;
 
-    // Clear existing content
     assignmentsList.innerHTML = '';
 
     if (assignments.length === 0) {
@@ -92,19 +58,16 @@ function renderAssignments() {
         return;
     }
 
-    // Loop through assignments and create cards
     assignments.forEach(assignment => {
         const assignmentCard = createAssignmentCard(assignment);
         assignmentsList.appendChild(assignmentCard);
     });
 }
 
-// Create individual assignment card
 function createAssignmentCard(assignment) {
     const card = document.createElement('div');
     card.className = 'assignment-card';
-    
-    // Determine status based on due date and current status
+
     const dueDate = new Date(assignment.dueDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -112,8 +75,7 @@ function createAssignmentCard(assignment) {
     
     let status = assignment.status;
     let statusClass = status;
-    
-    // If not submitted and past due date, mark as late
+
     if (status === 'pending' && dueDate < today) {
         status = 'late';
         statusClass = 'late';
@@ -121,12 +83,10 @@ function createAssignmentCard(assignment) {
     } else if (status === 'submitted') {
         card.classList.add('submitted');
     }
-    
-    // Format due date
+
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     const formattedDate = dueDate.toLocaleDateString('en-US', options);
-    
-    // Calculate days until due
+
     const daysUntil = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
     let dueDateText = '';
     if (status === 'submitted') {
@@ -157,8 +117,7 @@ function createAssignmentCard(assignment) {
             </button>
         </div>
     `;
-    
-    // Task 6: Add submit button event listener
+
     const submitBtn = card.querySelector('.submit-btn');
     if (submitBtn && status === 'pending') {
         submitBtn.addEventListener('click', () => handleSubmit(assignment.id, card, submitBtn));
@@ -167,29 +126,23 @@ function createAssignmentCard(assignment) {
     return card;
 }
 
-// Task 6: Handle assignment submission
 function handleSubmit(assignmentId, card, button) {
-    // Find the assignment
+    
     const assignment = assignments.find(a => a.id === assignmentId);
     if (!assignment) return;
-    
-    // Update assignment status
+
     assignment.status = 'submitted';
-    
-    // Update UI
+
     const statusBadge = card.querySelector('.assignment-status');
     statusBadge.textContent = 'SUBMITTED';
     statusBadge.className = 'assignment-status submitted';
-    
-    // Update button
+
     button.textContent = 'Submitted';
     button.disabled = true;
-    
-    // Update card styling
+
     card.classList.remove('late');
     card.classList.add('submitted');
-    
-    // Show success message
+
     if (window.showAlert) {
         window.showAlert(`${assignment.title} submitted successfully!`, 'success');
     }

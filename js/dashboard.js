@@ -1,12 +1,5 @@
-/**
- * dashboard.js - Dashboard Module
- * 
- * Task 3: Dynamic Dashboard Cards
- * Task 9: Navigation Active State
- * Task 10: Alert System
- */
 
-// Sample data structure for dashboard stats
+
 const dashboardStats = [
     {
         title: 'Total Courses',
@@ -30,7 +23,6 @@ const dashboardStats = [
     }
 ];
 
-// Sample data for assignments preview
 const upcomingAssignments = [
     {
         id: 1,
@@ -55,14 +47,12 @@ const upcomingAssignments = [
     }
 ];
 
-// Initialize dashboard when page loads
 document.addEventListener('DOMContentLoaded', () => {
     displayUserName();
     renderDashboardStats();
     renderUpcomingAssignments();
 });
 
-// Display logged-in user's name
 function displayUserName() {
     const userName = document.getElementById('userName');
     if (userName) {
@@ -71,15 +61,12 @@ function displayUserName() {
     }
 }
 
-// Task 3: Render dashboard statistics cards
 function renderDashboardStats() {
     const statsGrid = document.getElementById('statsGrid');
     if (!statsGrid) return;
 
-    // Clear existing content
     statsGrid.innerHTML = '';
 
-    // Loop through stats and create cards
     dashboardStats.forEach(stat => {
         const statCard = document.createElement('div');
         statCard.className = 'stat-card';
@@ -94,12 +81,10 @@ function renderDashboardStats() {
     });
 }
 
-// Render upcoming assignments preview
 function renderUpcomingAssignments() {
     const assignmentsPreview = document.getElementById('assignmentsPreview');
     if (!assignmentsPreview) return;
 
-    // Clear existing content
     assignmentsPreview.innerHTML = '';
 
     if (upcomingAssignments.length === 0) {
@@ -107,7 +92,6 @@ function renderUpcomingAssignments() {
         return;
     }
 
-    // Loop through assignments and create preview items
     upcomingAssignments.forEach(assignment => {
         const assignmentItem = document.createElement('div');
         assignmentItem.className = 'assignment-item';

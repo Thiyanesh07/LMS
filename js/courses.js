@@ -1,27 +1,5 @@
-/**
- * courses.js - Courses Module
- * 
- * Task 4: Course List Rendering
- * 
- * Requirements:
- * - Store course details in a JavaScript array
- * - Dynamically generate course cards
- * - Display course status (Active / Completed)
- * 
- * JavaScript Requirements:
- * - DOM creation (createElement)
- * - Template rendering using JavaScript
- * - Conditional rendering for status labels
- * 
- * Elements to interact with:
- * - #courseGrid - container for course cards
- * - #menuToggle - sidebar toggle button
- * 
- * Task 9: Navigation Active State
- * - Highlight active menu item based on current page
- */
 
-// Sample data structure for courses
+
 const courses = [
     {
         id: 1,
@@ -79,17 +57,14 @@ const courses = [
     }
 ];
 
-// Initialize courses page
 document.addEventListener('DOMContentLoaded', () => {
     renderCourses();
 });
 
-// Task 4: Render course cards dynamically
 function renderCourses() {
     const courseGrid = document.getElementById('courseGrid');
     if (!courseGrid) return;
 
-    // Clear existing content
     courseGrid.innerHTML = '';
 
     if (courses.length === 0) {
@@ -97,19 +72,16 @@ function renderCourses() {
         return;
     }
 
-    // Loop through courses and create cards
     courses.forEach(course => {
         const courseCard = createCourseCard(course);
         courseGrid.appendChild(courseCard);
     });
 }
 
-// Create individual course card
 function createCourseCard(course) {
     const card = document.createElement('div');
     card.className = 'course-card';
-    
-    // Determine status class and text
+
     const statusClass = course.status === 'active' ? 'active' : 'completed';
     const statusText = course.status === 'active' ? 'ACTIVE' : 'COMPLETED';
     
@@ -133,8 +105,7 @@ function createCourseCard(course) {
             </div>
         </div>
     `;
-    
-    // Add hover effect for interactivity
+
     card.addEventListener('click', () => {
         if (window.showAlert) {
             window.showAlert(`Viewing details for ${course.name}`, 'info');

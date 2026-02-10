@@ -1,36 +1,27 @@
-/**
- * auth.js - Login Validation Module
- * 
- * Task 1: Login Validation (Client-Side)
- * 
- * Requirements:
- * - Validate username and password fields
- * - Display error messages if fields are empty
- * - Allow login only if both fields are filled
- * - Redirect to dashboard page on successful validation
- * 
- * JavaScript Requirements:
- * - Event handling (submit, click)
- * - DOM selection and manipulation
- * - Prevent default form submission
- * 
- * Elements to interact with:
- * - #loginForm - form element
- * - #username - username input
- * - #password - password input
- * - #usernameError - error message for username
- * - #passwordError - error message for password
- * - #loginButton - submit button
- */
+// Initialize default credentials
+function initializeDefaultCredentials() {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const guestExists = users.find(u => u.username.toLowerCase() === 'guest');
+    
+    if (!guestExists) {
+        users.push({
+            username: 'guest',
+            email: 'guest@example.com',
+            password: '1234'
+        });
+        localStorage.setItem('users', JSON.stringify(users));
+    }
+}
 
-// Get DOM elements
+// Initialize on page load
+initializeDefaultCredentials();
+
 const loginForm = document.getElementById('loginForm');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 const usernameError = document.getElementById('usernameError');
 const passwordError = document.getElementById('passwordError');
 const loginButton = document.getElementById('loginButton');
-
 
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -39,8 +30,7 @@ loginForm.addEventListener('submit', (e) => {
     const passwordValue = password.value.trim();
     
     let isValid = true;
-    
-    // Validate username
+
     if (usernameValue === '') {
         usernameError.textContent = 'Username is required';
         usernameError.classList.add('show');
@@ -60,8 +50,7 @@ loginForm.addEventListener('submit', (e) => {
         usernameError.classList.remove('show');
         username.style.borderColor = 'var(--border-color)';
     }
-    
-    // Validate password
+
     if (passwordValue === '') {
         passwordError.textContent = 'Password is required';
         passwordError.classList.add('show');
@@ -71,10 +60,9 @@ loginForm.addEventListener('submit', (e) => {
         passwordError.classList.remove('show');
         password.style.borderColor = 'var(--border-color)';
     }
-    
-    // If validation passes, check credentials
+
     if (isValid) {
-        // Check if user exists and password matches
+        
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const user = users.find(u => u.username.toLowerCase() === usernameValue.toLowerCase());
         
@@ -91,8 +79,7 @@ loginForm.addEventListener('submit', (e) => {
             password.style.borderColor = 'var(--danger-color)';
             return;
         }
-        
-        // Successful login
+
         localStorage.setItem('username', user.username);
         localStorage.setItem('userEmail', user.email);
         localStorage.setItem('isLoggedIn', 'true');
@@ -104,7 +91,6 @@ loginForm.addEventListener('submit', (e) => {
     }
 });
 
-// Clear error when user starts typing
 username.addEventListener('input', () => {
     if (username.value.trim() !== '') {
         usernameError.classList.remove('show');
@@ -119,7 +105,6 @@ password.addEventListener('input', () => {
     }
 });
 
-// Function to show success alert
 function showSuccessMessage() {
     const alertContainer = document.getElementById('alertContainer');
     if (!alertContainer) return;
@@ -129,8 +114,7 @@ function showSuccessMessage() {
     alert.innerHTML = `<span>Login successful! Redirecting to dashboard...</span>`;
     
     alertContainer.appendChild(alert);
-    
-    
+
     setTimeout(() => {
         alert.remove();
     }, 1500);

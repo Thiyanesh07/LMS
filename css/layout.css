@@ -1,13 +1,11 @@
-/* ========== Layout Styles ========== */
 
-/* App Container */
+
 .app-container {
   display: flex;
   min-height: 100vh;
   position: relative;
 }
 
-/* Sidebar Styles */
 .sidebar {
   width: 250px;
   background-color: #2d3748;
@@ -64,7 +62,6 @@
   padding-left: calc(1.5rem - 4px);
 }
 
-/* Main Content Area */
 .main-content {
   flex: 1;
   margin-left: 250px;
@@ -72,7 +69,6 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Top Bar */
 .top-bar {
   background-color: rgba(255, 255, 255, 0.95);
   padding: 1rem 2rem;
@@ -117,13 +113,11 @@
   transform: scale(1.1);
 }
 
-/* Dashboard Container */
 .dashboard-container {
   padding: 2rem;
   max-width: 1400px;
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -150,7 +144,6 @@
   }
 }
 
-/* Sidebar Overlay for Mobile */
 .sidebar-overlay {
   display: none;
   position: fixed;
