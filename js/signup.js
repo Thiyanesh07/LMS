@@ -67,18 +67,6 @@ signupForm.addEventListener('submit', (e) => {
     if (passwordValue === '') {
         showError(signupPasswordError, signupPassword, 'Password is required');
         isValid = false;
-    } else if (passwordValue.length < 6) {
-        showError(signupPasswordError, signupPassword, 'Password must be at least 6 characters');
-        isValid = false;
-    } else if (!/[A-Z]/.test(passwordValue)) {
-        showError(signupPasswordError, signupPassword, 'Password must contain at least one uppercase letter');
-        isValid = false;
-    } else if (!/[a-z]/.test(passwordValue)) {
-        showError(signupPasswordError, signupPassword, 'Password must contain at least one lowercase letter');
-        isValid = false;
-    } else if (!/[0-9]/.test(passwordValue)) {
-        showError(signupPasswordError, signupPassword, 'Password must contain at least one number');
-        isValid = false;
     } else {
         hideError(signupPasswordError, signupPassword);
     }

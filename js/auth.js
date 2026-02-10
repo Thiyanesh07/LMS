@@ -67,26 +67,6 @@ loginForm.addEventListener('submit', (e) => {
         passwordError.classList.add('show');
         password.style.borderColor = 'var(--danger-color)';
         isValid = false;
-    } else if (passwordValue.length < 6) {
-        passwordError.textContent = 'Password must be at least 6 characters';
-        passwordError.classList.add('show');
-        password.style.borderColor = 'var(--danger-color)';
-        isValid = false;
-    } else if (!/[A-Z]/.test(passwordValue)) {
-        passwordError.textContent = 'Password must contain at least one uppercase letter';
-        passwordError.classList.add('show');
-        password.style.borderColor = 'var(--danger-color)';
-        isValid = false;
-    } else if (!/[a-z]/.test(passwordValue)) {
-        passwordError.textContent = 'Password must contain at least one lowercase letter';
-        passwordError.classList.add('show');
-        password.style.borderColor = 'var(--danger-color)';
-        isValid = false;
-    } else if (!/[0-9]/.test(passwordValue)) {
-        passwordError.textContent = 'Password must contain at least one number';
-        passwordError.classList.add('show');
-        password.style.borderColor = 'var(--danger-color)';
-        isValid = false;
     } else {
         passwordError.classList.remove('show');
         password.style.borderColor = 'var(--border-color)';
